@@ -39,7 +39,7 @@ defmodule LocalCafe do
 
   def item(assigns) do
     ~H"""
-    <.layout site_settings={@site_settings} locations={@locations} title={@item.title}>
+    <.layout site_settings={@site_settings} locations={@locations} title={@item.title} image={@item.image} description={@item.description}>
       <article class="menu-item">
         <header class="menu-item-header">
           <h1 class="menu-item-title"><%= @item.title %></h1>
@@ -124,19 +124,28 @@ defmodule LocalCafe do
   end
 
   def layout(assigns) do
+    # Use page-specific image/description if provided, otherwise use site defaults
+    assigns = assign_new(assigns, :image, fn -> nil end)
+    assigns = assign_new(assigns, :description, fn -> nil end)
+
+    assigns =
+      assigns
+      |> assign(:page_description, assigns[:description] || assigns.site_settings.description)
+      |> assign(:page_image, assigns[:image] || assigns.site_settings.image)
+
     ~H"""
     <!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={@site_settings.description} />
+        <meta name="description" content={@page_description} />
         <title>{@title} | {@site_settings.site_name}</title>
 
         <%!-- OpenGraph meta tags --%>
         <meta property="og:title" content={"#{@title} | #{@site_settings.site_name}"} />
-        <meta property="og:description" content={@site_settings.description} />
-        <meta property="og:image" content={full_url(assigns, @site_settings.image)} />
+        <meta property="og:description" content={@page_description} />
+        <meta property="og:image" content={full_url(assigns, @page_image)} />
         <meta property="og:url" content={@site_settings.domain} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={@site_settings.site_name} />
@@ -144,8 +153,8 @@ defmodule LocalCafe do
         <%!-- Twitter Card meta tags --%>
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={"#{@title} | #{@site_settings.site_name}"} />
-        <meta name="twitter:description" content={@site_settings.description} />
-        <meta name="twitter:image" content={full_url(assigns, @site_settings.image)} />
+        <meta name="twitter:description" content={@page_description} />
+        <meta name="twitter:image" content={full_url(assigns, @page_image)} />
 
         <link rel="stylesheet" href={path(assigns, "/assets/css/app.css")} />
         <script defer src={path(assigns, "/assets/js/app.js")}></script>
