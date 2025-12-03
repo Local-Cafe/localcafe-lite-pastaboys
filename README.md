@@ -17,6 +17,7 @@ It creates a professional website that can cost nothing to host and are easy to 
 
 ### Online Menu
 - Display your full menu with photos, descriptions, and prices
+- Highlight daily specials above the menu (no tags, stands out visually)
 - Single prices or multiple options (small/large, hot/iced, etc.)
 - Control the order items appear with position field
 - Customers filter by tags (vegetarian, gluten-free, breakfast, lunch)
@@ -113,6 +114,28 @@ Add a `position` field to control the order items appear on the menu (0-indexed,
 - Items are sorted by `position` first, then alphabetically by title
 - Items with the same position are sorted alphabetically
 - Items without a position appear at the end, sorted alphabetically
+
+### Specials
+
+Create markdown files in `priv/specials/` for daily specials and temporary deals. Specials appear above the menu grid and don't have tags (no filtering).
+
+```elixir
+%{
+  title: "Today's Special",
+  prices: "$9.99",
+  description: "Chef's selection with seasonal ingredients",
+  image: "/images/special.jpg",
+  position: 0
+}
+---
+Ask your server about today's special!
+```
+
+**Key differences from menu items:**
+- No `tags` field (specials aren't filterable)
+- Displayed above the regular menu in a highlighted section
+- Perfect for daily specials, seasonal items, or limited-time offers
+- Automatically hidden when `priv/specials/` is empty
 
 ### Locations
 Create markdown files in `priv/locations/`. Coordinates fetched automatically.
@@ -300,6 +323,7 @@ local_cafe_lite/
 ├── priv/
 │   ├── home.md           # Site configuration
 │   ├── menu/             # Menu item markdown files
+│   ├── specials/         # Daily specials markdown files
 │   ├── locations/        # Location markdown files
 │   └── output/           # Generated static site
 └── mix.exs               # Project configuration

@@ -1,0 +1,41 @@
+@layer components {
+  .specials-section {
+    padding: var(--space-8) var(--space-4);
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+  }
+
+  .specials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+
+  .special-card {
+    border: 2px solid var(--color-accent);
+    position: relative;
+  }
+
+  .special-card::before {
+    content: "Special";
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    background: var(--color-accent);
+    color: var(--color-background);
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .specials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

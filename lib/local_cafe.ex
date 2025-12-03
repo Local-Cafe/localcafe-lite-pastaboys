@@ -3,6 +3,7 @@ defmodule LocalCafe do
   import Phoenix.HTML
 
   alias LocalCafe.Menu
+  alias LocalCafe.Specials
   alias LocalCafe.Site
   alias LocalCafe.Location
 
@@ -12,6 +13,7 @@ defmodule LocalCafe do
 
   def build() do
     items = Menu.all_items()
+    specials = Specials.all_items()
     tags = Menu.all_tags()
     locations = Location.all_locations()
 
@@ -19,6 +21,7 @@ defmodule LocalCafe do
       "index.html",
       index(%{
         items: items,
+        specials: specials,
         tags: tags,
         site_settings: Site.site_settings(),
         locations: locations
@@ -35,6 +38,19 @@ defmodule LocalCafe do
       render_file(
         item.path,
         item(%{item: item, site_settings: Site.site_settings(), locations: locations})
+      )
+    end
+
+    for special <- specials do
+      dir = Path.dirname(special.path)
+
+      if dir != "." do
+        File.mkdir_p!(Path.join([@output_dir, dir]))
+      end
+
+      render_file(
+        special.path,
+        special(%{item: special, site_settings: Site.site_settings(), locations: locations})
       )
     end
 

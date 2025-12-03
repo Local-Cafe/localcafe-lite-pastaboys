@@ -10,6 +10,32 @@
     <img src={path(assigns, @site_settings.hero_image)} :if={@site_settings.hero_image && is_binary(@site_settings.hero_image)} />
     <p :for={hero <- @site_settings.hero}>{hero}</p>
   </div>
+
+  <section class="specials-section" :if={@specials && length(@specials) > 0}>
+    <h2 class="menu-section-heading">Specials</h2>
+    <div class="specials-grid">
+      <article class="menu-card special-card" :for={special <- @specials}>
+        <a href={path(assigns, special.path)}>
+          <img :if={special.image} src={path(assigns, special.image)} alt={special.title} class="menu-card-image" />
+        </a>
+        <div class="menu-card-header">
+          <h2 class="menu-card-title">
+            <a href={path(assigns, special.path)}>{special.title}</a>
+          </h2>
+          <div class="menu-card-prices" :if={special.prices && is_binary(special.prices)}>
+            <span class="price-option">{special.prices}</span>
+          </div>
+          <div class="menu-card-prices" :if={special.prices && is_list(special.prices)}>
+            <span class="price-option" :for={{k, v} <- special.prices}>
+              {k}: {v}
+            </span>
+          </div>
+        </div>
+        <p class="menu-card-description">{special.description}</p>
+      </article>
+    </div>
+  </section>
+
   <section id="menu" class="menu-section">
     <h2 class="menu-section-heading">Our Menu</h2>
     <div class="menu-filters">

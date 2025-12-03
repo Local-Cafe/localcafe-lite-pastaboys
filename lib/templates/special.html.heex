@@ -1,0 +1,23 @@
+<.layout site_settings={@site_settings} locations={@locations} title={@item.title} image={@item.image} description={@item.description}>
+  <article class="menu-item special-item">
+    <header class="menu-item-header">
+      <h1 class="menu-item-title">{@item.title}</h1>
+      <div class="menu-item-prices" :if={@item.prices && is_binary(@item.prices)}>
+        <span class="price-option">{@item.prices}</span>
+      </div>
+      <div class="menu-item-prices" :if={@item.prices && is_list(@item.prices)}>
+        <span class="price-option" :for={{k, v} <- @item.prices}>
+          {k}: {v}
+        </span>
+      </div>
+      <p class="menu-item-description">{@item.description}</p>
+    </header>
+    <img :if={@item.image} src={path(assigns, @item.image)} alt={@item.title} class="menu-item-image" />
+    <div class="menu-item-body">
+      {raw(@item.body)}
+    </div>
+    <div class="menu-item-actions">
+      <a href="/" class="btn btn-primary">Back to Menu</a>
+    </div>
+  </article>
+</.layout>
