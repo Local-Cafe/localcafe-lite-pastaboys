@@ -37,6 +37,8 @@
 
 /* Components */
 @import "./components/navigation.css";
+@import "./components/hero.css";
+@import "./components/home-content.css";
 @import "./components/menu-card.css";
 @import "./components/menu-item.css";
 @import "./components/buttons.css";
