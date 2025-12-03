@@ -1,0 +1,48 @@
+<.layout site_settings={@site_settings} locations={@locations} title={@site_settings.title}>
+  <div class="menu-hero">
+    <div class="hero-slideshow" :if={@site_settings.hero_image && is_list(@site_settings.hero_image)}>
+      <img
+        :for={{img, idx} <- Enum.with_index(@site_settings.hero_image)}
+        src={path(assigns, img)}
+        class={"hero-slide #{if idx == 0, do: "active", else: ""}"}
+      />
+    </div>
+    <img src={path(assigns, @site_settings.hero_image)} :if={@site_settings.hero_image && is_binary(@site_settings.hero_image)} />
+    <p :for={hero <- @site_settings.hero}>{hero}</p>
+  </div>
+  <section id="menu" class="menu-section">
+    <h2 class="menu-section-heading">Our Menu</h2>
+    <div class="menu-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button :for={tag <- @tags} class="filter-btn" data-filter={tag}>{tag}</button>
+    </div>
+    <div class="menu-grid">
+    <article class="menu-card" :for={item <- @items} data-tags={Enum.join(item.tags, ",")}>
+      <a href={path(assigns, item.path)}><img :if={item.image} src={path(assigns, item.image)} alt={item.title} class="menu-card-image" /></a>
+      <div class="menu-card-header">
+        <h2 class="menu-card-title">
+          <a href={path(assigns, item.path)}>{item.title}</a>
+        </h2>
+        <div class="menu-card-prices" :if={item.prices && is_binary(item.prices)}>
+          <span class="price-option">{item.prices}</span>
+        </div>
+        <div class="menu-card-prices" :if={item.prices && is_list(item.prices)}>
+          <span class="price-option" :for={{k, v} <- item.prices}>
+            {k}: {v}
+          </span>
+        </div>
+      </div>
+      <p class="menu-card-description">{item.description}</p>
+      <ul class="menu-card-tags">
+        <li class="menu-tag" :for={tag <- item.tags}>
+          <a href={path(assigns, "/#filter:#{tag}")}>{tag}</a>
+        </li>
+      </ul>
+    </article>
+  </div>
+  </section>
+
+  <div class="home-content">
+    {raw(@site_settings.body)}
+  </div>
+</.layout>

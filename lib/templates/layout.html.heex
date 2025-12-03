@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={page_description(assigns)} />
+    <title>{@title} | {@site_settings.site_name}</title>
+
+    <%!-- OpenGraph meta tags --%>
+    <meta property="og:title" content={"#{@title} | #{@site_settings.site_name}"} />
+    <meta property="og:description" content={page_description(assigns)} />
+    <meta property="og:image" content={full_url(assigns, page_image(assigns))} />
+    <meta property="og:url" content={@site_settings.domain} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={@site_settings.site_name} />
+
+    <%!-- Twitter Card meta tags --%>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={"#{@title} | #{@site_settings.site_name}"} />
+    <meta name="twitter:description" content={page_description(assigns)} />
+    <meta name="twitter:image" content={full_url(assigns, page_image(assigns))} />
+
+    <link rel="stylesheet" href={path(assigns, "/assets/css/app.css")} />
+    <script defer src={path(assigns, "/assets/js/app.js")}></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav">
+        <a href={path(assigns, "/")} class="site-logo">
+          <img :if={@site_settings.logo} src={path(assigns, @site_settings.logo)} alt={@site_settings.site_name} class="site-logo-image" />
+          <span class="site-logo-text">{@site_settings.site_name}</span>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+        <label for="nav-toggle" class="nav-toggle-label">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <ul class="nav-links">
+          <li><a href={path(assigns, "/#menu")}>Menu</a></li>
+          <li><a href={path(assigns, "#locations")}>Locations</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="site-main">
+      {render_slot(@inner_block)}
+    </main>
+    <footer class="site-footer" id="locations">
+      <div class="locations-grid">
+        <div class="location-card" :for={location <- @locations}>
+          <h3 class="location-name">{location.name}</h3>
+          <div class="location-description">{Phoenix.HTML.raw(location.body)}</div>
+          <div class="location-content">
+            <div class="location-info">
+              <div class="location-section">
+                <h4>Address</h4>
+                <p>{location.street}</p>
+                <p>{location.city_state}</p>
+              </div>
+
+              <div class="location-section">
+                <h4>Hours</h4>
+                <p :for={hour <- location.hours}>{hour}</p>
+              </div>
+
+              <div class="location-section">
+                <h4>Contact</h4>
+                <p>Phone: {location.phone}</p>
+                <p>Email: {location.email}</p>
+              </div>
+            </div>
+            <div class="location-map" :if={location.latitude && location.longitude}>
+              <iframe
+                title="openstreetmaps"
+                width="600"
+                height="400"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                src={"https://www.openstreetmap.org/export/embed.html?bbox=#{String.to_float(location.longitude) - 0.0005},#{String.to_float(location.latitude) - 0.0005},#{String.to_float(location.longitude) + 0.0005},#{String.to_float(location.latitude) + 0.0005}&layer=mapnik&marker=#{location.latitude},#{location.longitude}"}
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 {@site_settings.site_name}. All rights reserved.</p>
+        <a href="https://localcafe.org" class="built-with-badge" target="_blank" rel="noopener noreferrer">
+          <img src={path(assigns, "/images/localcafe.svg")} alt="LocalCafe" class="built-with-logo" />
+
+          <span>Built with</span>
+          <span>localcafe.org</span>
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
