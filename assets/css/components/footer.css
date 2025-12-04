@@ -57,6 +57,50 @@
         margin: 0 0 var(--space-3) 0;
     }
 
+    .social-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-4);
+        margin-bottom: var(--space-4);
+    }
+
+    /* NOTE: Never use translateY or other transform animations on hover.
+     * Use simple color/opacity changes instead for a more subtle effect. */
+    .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: var(--space-2);
+        border-radius: var(--radius-md);
+        background-color: var(--color-surface-primary);
+        transition: background-color 0.2s ease;
+        text-decoration: none;
+    }
+
+    .social-link:hover {
+        background-color: var(--color-surface-secondary);
+    }
+
+    .social-link:focus-visible {
+        outline: var(--focus-ring-width) solid var(--focus-ring-color);
+        outline-offset: var(--focus-ring-offset);
+    }
+
+    .social-icon {
+        width: 24px;
+        height: 24px;
+        display: block;
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+    }
+
+    .social-link:hover .social-icon {
+        opacity: 1;
+    }
+
     .built-with-badge {
         display: inline-flex;
         align-items: center;

@@ -1,4 +1,29 @@
-# This file configures your site's layout and your home page.
+#   /priv/home.md
+#
+#   This file repersents the site's configration and the home page's content
+#
+#   site_name - This will show in the title tag in all pages
+#
+#   title - The prefix of the title on the home page
+#
+#   description - This will show in the header's description meta tag, used for SEO
+#
+#   image - The preivew image seen in the header's meta tags used by social networks and SEO
+#
+#   logo - This is the companies branding seen in the top navigation bar.
+#   Warning. It's advised to use a 100x100 png
+#
+#   hero - A list of strings that are using on the landing section of the home page.
+#   Each element in the list is a line.
+#
+#   hero_image - a list of images relative to the domain for use in the slide show on the home page
+#
+#   domain - the site's main url.
+#
+#   social_links - A list of social media profiles to display as icons in the footer.
+#   Available icons: bluesky, doordash, facebook, github, instagram, tiktok, ubereats, x, yelp
+#   Format: [platform: "url", ...]
+
 
 %{
   site_name: "Pasta Boy's Lil Cafe",
@@ -8,7 +33,12 @@
   logo: "/images/logo.png",
   hero: ["Fresh, delicious pasta made with love.", "Discover our selection of carefully crafted dishes."],
   hero_image: ["/images/hero_1.jpg", "/images/hero_2.jpg", "/images/hero_3.jpg"],
-  domain: "https://lite.localcafe.org/"
+  domain: "https://lite.localcafe.org/",
+  social_links: [
+    instagram: "https://instagram.com/example",
+    facebook: "https://facebook.com/example",
+    x: "https://x.com/example"
+  ]
 }
 ---
 

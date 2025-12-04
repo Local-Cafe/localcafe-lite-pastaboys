@@ -85,6 +85,22 @@
         </div>
       </div>
       <div class="footer-bottom">
+        <div :if={Map.get(@site_settings, :social_links)} class="social-links">
+          <a
+            :for={{platform, url} <- Map.get(@site_settings, :social_links, [])}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label={String.capitalize(to_string(platform))}
+          >
+            <img
+              src={path(assigns, "/images/social/#{platform}.svg")}
+              alt={String.capitalize(to_string(platform))}
+              class="social-icon"
+            />
+          </a>
+        </div>
         <p>&copy; 2025 {@site_settings.site_name}. All rights reserved.</p>
         Built with <a href="https://localcafe.org" target="_blank">localcafe.org</a>
       </div>

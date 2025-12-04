@@ -17,7 +17,8 @@ defmodule LocalCafe.Home do
     :hero,
     :hero_image,
     :domain,
-    :logo
+    :logo,
+    :social_links
   ]
 
   def build(_filename, attrs, body) do
