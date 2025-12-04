@@ -6,6 +6,12 @@
     /* Menu section wrapper */
     .menu-section {
         scroll-margin-top: 6rem;
+        scroll-behavior: smooth;
+    }
+
+    /* Hidden filter state elements */
+    .filter-state {
+        display: none;
     }
 
     .menu-section-heading {
@@ -62,6 +68,29 @@
         background-color: var(--color-primary-hover);
         border-color: var(--color-primary-hover);
     }
+
+    /* CSS-only filtering using :target pseudo-class */
+    /* Default: show all cards (or when #filter-all is targeted) */
+    .menu-card {
+        display: flex;
+    }
+
+    /* When any specific filter is targeted (not "all"), hide all cards by default */
+    .filter-state:target:not(#filter-all) ~ .menu-grid .menu-card {
+        display: none;
+    }
+
+    /* Show cards that match the targeted filter - rules generated dynamically in template */
+
+    /* Active state for "All" button */
+    .menu-section:has(#filter-all:target) .filter-btn[href="#filter-all"],
+    .menu-section:not(:has(.filter-state:target)) .filter-btn[href="#filter-all"] {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        color: var(--literal-white);
+    }
+
+    /* Active states for specific filters - rules generated dynamically in template */
 
     .menu-grid {
         display: grid;
