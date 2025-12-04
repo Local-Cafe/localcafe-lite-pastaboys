@@ -35,9 +35,8 @@
   hero_image: ["/images/hero_1.jpg", "/images/hero_2.jpg", "/images/hero_3.jpg"],
   domain: "https://lite.localcafe.org/",
   social_links: [
-    instagram: "https://instagram.com/example",
-    facebook: "https://facebook.com/example",
-    x: "https://x.com/example"
+    bluesky: "https://bsky.app/profile/localcafe.org",
+    github: "https://github.com/Local-Cafe"
   ]
 }
 ---
