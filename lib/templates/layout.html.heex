@@ -21,7 +21,6 @@
     <meta name="twitter:image" content={full_url(assigns, page_image(assigns))} />
 
     <link rel="stylesheet" href={path(assigns, "/assets/css/app.css")} />
-    <script defer src={path(assigns, "/assets/js/app.js")}></script>
   </head>
   <body>
     <header class="site-header">
@@ -105,5 +104,10 @@
         Built with <a href="https://localcafe.org" target="_blank">localcafe.org</a>
       </div>
     </footer>
+
+    <!-- Inline JS: Close mobile menu when clicking nav links -->
+    <script>
+      document.querySelectorAll('.nav-links a').forEach(l=>l.onclick=()=>document.getElementById('nav-toggle').checked=false);
+    </script>
   </body>
 </html>

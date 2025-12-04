@@ -1,5 +1,3 @@
-import * as esbuild from "esbuild";
-
 import { bundleAsync } from "lightningcss";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
@@ -12,39 +10,6 @@ const __dirname = dirname(__filename);
 const args = process.argv.slice(2);
 const watch = args.includes("--watch");
 const deploy = args.includes("--deploy");
-
-const loader = {
-  ".svg": "file",
-  ".png": "file",
-  ".jpg": "file",
-  ".jpeg": "file",
-  ".gif": "file",
-  ".woff": "file",
-  ".woff2": "file",
-  ".ttf": "file",
-  ".eot": "file",
-};
-
-const plugins = [];
-
-const config = {
-  entryPoints: ["js/app.js"],
-  bundle: true,
-  target: "es2022",
-  outdir: resolve(__dirname, "../priv/output/assets/js"),
-  logLevel: "info",
-  loader,
-  plugins,
-  sourcemap: deploy ? false : watch ? "inline" : "external",
-  minify: deploy,
-  splitting: true,
-  format: "esm",
-  chunkNames: "chunks/[name]-[hash]",
-  define: {
-    "process.env.NODE_ENV": deploy ? '"production"' : '"development"',
-  },
-  external: ["/fonts/*", "/images/*"],
-};
 
 // CSS build function
 async function buildCSS() {
@@ -83,7 +48,7 @@ async function buildCSS() {
   }
 }
 
-// Build both JS and CSS
+// Build CSS only (JS is inlined in HTML)
 if (watch) {
   // Build CSS initially
   await buildCSS();
@@ -99,11 +64,8 @@ if (watch) {
     },
   );
 
-  // Watch JS files
-  const ctx = await esbuild.context(config);
-  await ctx.watch();
   console.log("Watching for changes...");
 } else {
-  // Build both for production
-  await Promise.all([esbuild.build(config), buildCSS()]);
+  // Build CSS for production
+  await buildCSS();
 }
