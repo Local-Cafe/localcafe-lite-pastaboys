@@ -26,13 +26,13 @@
 
 
 %{
-  site_name: "LocalCafe.org Lite Version",
+  site_name: "Pasta Boy's Lil Cafe",
   title: "Home",
-  description: "A static site generator for local restaurants and cafes",
-  image: "/images/example-logo.png",
-  logo: "/images/example-logo.png",
-  hero: ["Example hero text line 1", "Examle Hero text line 2"],
-  hero_image: ["/images/example-hero.png"],
+  description: "Home made pasta like your ma' used to make it",
+  image: "/images/pasta.jpg",
+  logo: "/images/logo.png",
+  hero: ["Fresh, delicious pasta made with love.", "Discover our selection of carefully crafted dishes."],
+  hero_image: ["/images/hero_1.jpg", "/images/hero_2.jpg", "/images/hero_3.jpg"],
   domain: "https://lite.localcafe.org/",
   social_links: [
     instagram: "https://instagram.com/example",
@@ -42,18 +42,57 @@
 }
 ---
 
-## This is a H2 tag
+## Disclaimer
 
-Ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+This is not a real restaurant,
 
-### This is a H3 tag
+## About US
 
-Sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+Pasta boy's started in ma's kitchen after a plate of ma's spaggite in old town meatball. 20 years later they are still slerping noddles.
 
-* Some list item 1
-* Some list item 2
-* Some list item 3
+## Orders to GO
 
-basic [link](https://example.com)
+We do orders to go, call us and place an order for pick up
 
-> Some quote
+## This was an example of using localcafe lite
+
+You can use localcafe lite for free and also host static restaurant menu sites for free using github pages.
+
+Learn more about this project at [https://github.com/Local-Cafe/localcafe-lite](https://github.com/Local-Cafe/localcafe-lite)
+
+### Free / No Monthly Fees
+- This project is open source and free
+- This project can host for free on GitHub Pages, Netlify, or Cloudflare Pages
+
+### Static Website
+- Fast page loads - everything pre-generated
+- No database or server required
+
+### Online Menu
+- Display your full menu with photos, descriptions, and prices
+- Single prices or multiple options (small/large, hot/iced, etc.)
+- Customers filter by tags (vegetarian, gluten-free, breakfast, lunch)
+- Update by editing simple text files
+
+### Location & Maps
+- Show one location or multiple locations
+- Automatic maps - just provide your address
+- Each location has its own hours, phone, and email
+- Maps adjust to any screen size
+
+### Photo Slideshow
+- Homepage displays rotating photos with smooth transitions
+- Supports single image or multiple images
+- Photos fade between each other automatically
+
+### Mobile Responsive
+- Works on all phones and tablets
+- Menu and navigation adapt to screen size
+- No pinching or zooming required
+
+### Social Sharing
+- Links shared on Facebook, Twitter, Instagram show rich previews
+- Displays your photo and description automatically
+
+
+** Images in example provided by https://pixabay.com/ **
