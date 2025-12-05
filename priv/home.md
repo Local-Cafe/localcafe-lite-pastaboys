@@ -73,7 +73,7 @@ Learn more about this project at [https://github.com/Local-Cafe/localcafe-lite](
 - Customers filter by tags (vegetarian, gluten-free, breakfast, lunch)
 - Update by editing simple text files
 
-### Location & Maps
+### Locations
 - Show one location or multiple locations
 - Each location has its own hours, phone, email and optional image. 
 
