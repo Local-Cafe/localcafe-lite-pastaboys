@@ -15,6 +15,8 @@
 #
 #   hours - A list of strings that can be used to list hours of operation
 #
+#   image - Optional. Path to an image for this location (e.g., storefront photo, map, etc.)
+#
 #   The body - Everything below the --- will be treaded as Markdown text and converted to standard html
 #   Note - to learn more about markdown formating please review https://www.markdownguide.org/
 #   Warning - Its advised to keep this short and simple for the location.
@@ -26,7 +28,8 @@
   city_state: "Portland, OR 97202, USA",
   phone: "(555) 123-4567",
   email: "hello@localcafe.org",
-  hours: ["Mon-Fri: 8am - 8pm", "Sat-Sun: 9am - 9pm"]
+  hours: ["Mon-Fri: 8am - 8pm", "Sat-Sun: 9am - 9pm"],
+  image: "/images/example-item.png"
 }
 ---
 

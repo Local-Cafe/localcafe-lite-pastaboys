@@ -62,17 +62,12 @@
                 <p>Email: {location.email}</p>
               </div>
             </div>
-            <div class="location-map" :if={location.latitude && location.longitude}>
-              <iframe
-                title="openstreetmaps"
-                width="600"
-                height="400"
-                frameborder="0"
-                scrolling="no"
-                marginheight="0"
-                marginwidth="0"
-                src={"https://www.openstreetmap.org/export/embed.html?bbox=#{String.to_float(location.longitude) - 0.0005},#{String.to_float(location.latitude) - 0.0005},#{String.to_float(location.longitude) + 0.0005},#{String.to_float(location.latitude) + 0.0005}&layer=mapnik&marker=#{location.latitude},#{location.longitude}"}
-              ></iframe>
+            <div class="location-map" :if={Map.get(location, :image)}>
+              <img
+                src={path(assigns, Map.get(location, :image))}
+                alt={"Image for #{location.name}"}
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

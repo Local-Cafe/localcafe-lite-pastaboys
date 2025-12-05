@@ -27,6 +27,8 @@ defmodule LocalCafe.MixProject do
       {:nimble_publisher, "~> 1.0", runtime: false},
       {:earmark, git: "https://github.com/pragdave/earmark", runtime: false, override: true},
       {:jason, "~> 1.4"},
+      {:req, "~> 0.5"},
+      {:image, "~> 0.54"},
       {:dialyxir, "~> 1.4", runtime: false}
     ]
   end

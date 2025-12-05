@@ -12,6 +12,12 @@ defmodule LocalCafe do
   @output_dir Application.app_dir(:local_cafe, "priv/output")
 
   def build() do
+    # Start Finch for HTTP requests (build time only)
+    case Finch.start_link(name: Req.Finch) do
+      {:ok, _} -> :ok
+      {:error, {:already_started, _}} -> :ok
+    end
+
     items = Menu.all_items()
     specials = Specials.all_items()
     tags = Menu.all_tags()
