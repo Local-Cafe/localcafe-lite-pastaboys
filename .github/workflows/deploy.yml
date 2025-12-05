@@ -73,6 +73,7 @@ jobs:
     needs: build
     steps:
       - name: Check if GitHub Pages is enabled
+        id: pages-check
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -80,16 +81,18 @@ jobs:
           PAGES_STATUS=$(gh api repos/${{ github.repository }}/pages --jq '.status' 2>&1 || echo "disabled")
 
           if [[ "$PAGES_STATUS" == *"Not Found"* ]] || [[ "$PAGES_STATUS" == "disabled" ]]; then
-            echo "::error::GitHub Pages is not enabled for this repository."
-            echo "::error::Please enable GitHub Pages in your repository settings:"
-            echo "::error::  1. Go to Settings → Pages"
-            echo "::error::  2. Under 'Build and deployment', set Source to 'GitHub Actions'"
-            echo "::error::  3. Save and re-run this workflow"
-            exit 1
+            echo "::warning::GitHub Pages is not enabled for this repository."
+            echo "::warning::Skipping deployment. To enable GitHub Pages:"
+            echo "::warning::  1. Go to Settings → Pages"
+            echo "::warning::  2. Under 'Build and deployment', set Source to 'GitHub Actions'"
+            echo "::warning::  3. Save and re-run this workflow"
+            echo "enabled=false" >> $GITHUB_OUTPUT
+          else
+            echo "✓ GitHub Pages is enabled (status: $PAGES_STATUS)"
+            echo "enabled=true" >> $GITHUB_OUTPUT
           fi
 
-          echo "✓ GitHub Pages is enabled (status: $PAGES_STATUS)"
-
       - name: Deploy to GitHub Pages
+        if: steps.pages-check.outputs.enabled == 'true'
         id: deployment
         uses: actions/deploy-pages@v4

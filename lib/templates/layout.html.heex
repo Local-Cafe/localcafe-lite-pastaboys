@@ -21,7 +21,6 @@
     <meta name="twitter:image" content={full_url(assigns, page_image(assigns))} />
 
     <link rel="stylesheet" href={path(assigns, "/assets/css/app.css")} />
-    <script defer src={path(assigns, "/assets/js/app.js")}></script>
   </head>
   <body>
     <header class="site-header">
@@ -30,12 +29,6 @@
           <img :if={@site_settings.logo} src={path(assigns, @site_settings.logo)} alt={@site_settings.site_name} class="site-logo-image" />
           <span class="site-logo-text">{@site_settings.site_name}</span>
         </a>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-        <label for="nav-toggle" class="nav-toggle-label">
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
         <ul class="nav-links">
           <li><a href={path(assigns, "/#menu")}>Menu</a></li>
           <li><a href={path(assigns, "#locations")}>Locations</a></li>
