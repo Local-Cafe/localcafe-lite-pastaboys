@@ -75,9 +75,7 @@ Learn more about this project at [https://github.com/Local-Cafe/localcafe-lite](
 
 ### Location & Maps
 - Show one location or multiple locations
-- Automatic maps - just provide your address
-- Each location has its own hours, phone, and email
-- Maps adjust to any screen size
+- Each location has its own hours, phone, email and optional image. 
 
 ### Photo Slideshow
 - Homepage displays rotating photos with smooth transitions
