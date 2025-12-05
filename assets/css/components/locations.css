@@ -1,20 +1,11 @@
 @layer components {
   .locations-grid {
     display: grid;
+    grid-template-columns: 1fr;
     gap: var(--space-8);
     padding: var(--space-8) var(--space-4);
     max-width: 1200px;
     margin: 0 auto;
-  }
-
-  /* Single location: full width */
-  .locations-grid:has(.location-card:only-child) {
-    grid-template-columns: 1fr;
-  }
-
-  /* Multiple locations: responsive grid */
-  .locations-grid:has(.location-card:nth-child(2)) {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
   }
 
   .location-card {
@@ -22,6 +13,36 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--space-6);
+  }
+
+  /* Two-column layout when image exists */
+  @media (min-width: 768px) {
+    .location-card:has(.location-map) {
+      padding: 0;
+      position: relative;
+    }
+
+    /* Name and description constrained to left half */
+    .location-card:has(.location-map) .location-name {
+      padding: var(--space-6) var(--space-6) 0;
+      width: 50%;
+    }
+
+    .location-card:has(.location-map) .location-description {
+      padding: var(--space-4) var(--space-6) var(--space-6);
+      width: 50%;
+    }
+
+    .location-card:has(.location-map) .location-content {
+      display: flex;
+      gap: 0;
+    }
+
+    .location-card:has(.location-map) .location-info {
+      flex: 1;
+      padding: 0 var(--space-6) var(--space-6);
+      max-width: 50%;
+    }
   }
 
   .location-name {
@@ -43,17 +64,22 @@
     gap: var(--space-6);
   }
 
-  /* Two-column layout on larger screens when map exists */
-  @media (min-width: 768px) {
-    .location-content:has(.location-map) {
-      grid-template-columns: auto 1fr;
-    }
-  }
-
   .location-info {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+  }
+
+  /* Horizontal layout when no image */
+  @media (min-width: 768px) {
+    .location-card:not(:has(.location-map)) .location-info {
+      flex-direction: row;
+      gap: var(--space-8);
+    }
+
+    .location-card:not(:has(.location-map)) .location-section {
+      flex: 1;
+    }
   }
 
   .location-section h4 {
@@ -80,7 +106,20 @@
     border-radius: var(--radius-md);
     overflow: hidden;
     border: 1px solid var(--color-border);
-    min-height: 400px;
+    max-width: 512px;
+  }
+
+  @media (min-width: 768px) {
+    .location-card:has(.location-map) .location-map {
+      max-width: none;
+      border: none;
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+    }
   }
 
   @media (max-width: 767px) {
@@ -113,17 +152,12 @@
     .location-section {
       padding-bottom: var(--space-2);
     }
-
-    .location-map {
-      min-height: 300px;
-    }
   }
 
-  .location-map iframe {
+  .location-map img {
     display: block;
     width: 100%;
     height: 100%;
-    min-height: inherit;
-    border: 0;
+    object-fit: cover;
   }
 }

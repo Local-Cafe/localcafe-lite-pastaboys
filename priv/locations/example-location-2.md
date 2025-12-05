@@ -28,8 +28,7 @@
   city_state: "Portland, OR 97202, USA",
   phone: "(555) 123-4567",
   email: "hello@localcafe.org",
-  hours: ["Mon-Fri: 8am - 8pm", "Sat-Sun: 9am - 9pm"],
-  image: "/images/maps/main-street-location.png"
+  hours: ["Mon-Fri: 8am - 8pm", "Sat-Sun: 9am - 9pm"]
 }
 ---
 
